@@ -3,14 +3,14 @@
 	
 	Project: Fram3w0rk PHP 0.5 [Alpha]
 	Website: http://www.fram3w0rk.com/
-	Last Modified: Nov 3, 2012
-	Author: Jonathan Lawton (jlawton@jl-ectronics.com)
-	Contributers: none, yet :(
+	Last Modified: Oct 1, 2013
+	Author: Jonathan Lawton (wanathan101@gmail.com)
+	Contributers: none, yet :-(  (Come join in!)
 	
 	Copyright (c) 2012-2013, Jonathan Lawton. All rights reserved.
 	
 	TERMS AND CONDITIONS
-	Revised: Nov 3, 2012
+	Revised: Oct 1, 2013
 	
 	"Source" includes all files and processes included in previous, current and
 	future versions of this project except where 3rd party source may also be
@@ -20,30 +20,31 @@
 	Redistribution and use in source and binary forms, with or without
 	modification, are permitted provided that the following conditions are met:
 	
-		* Redistributions of source code must retain the above copyright notice,
-		  this list of conditions and the following disclaimer.
-		* Redistributions in binary form must reproduce the above copyright notice,
-		  this list of conditions and the following disclaimer in the documentation
-		  and/or other materials provided with the distribution.
-		* Neither the name of Jonathan Lawton nor the names of its contributors may
-		  be used to endorse or promote products derived from this software without
-		  specific prior written permission.
-		* These Terms and Conditions may change at any time without given notice at
-		  which point these will become replaced and inherited by the newest copy
-		  included in the source or at http://www.fram3w0rk.com/software/terms/ .
+		* Redistributions of source code must retain the above copyright
+		  notice, this list of conditions and the following disclaimer.
+		* Redistributions in binary form must reproduce the above copyright
+		  notice, this list of conditions and the following disclaimer in the
+		  documentation and/or other materials provided with the distribution.
+		* Neither the name of Jonathan Lawton nor the names of its
+		  contributors may be used to endorse or promote products derived from
+		  this software without specific prior written permission.
+		* These Terms and Conditions may change at any time without given
+		  notice at which point these will become replaced and inherited by the
+		  newest copy included in the source or at:
+		  [http://www.fram3w0rk.com/software/terms/].
 	
 	
 	WARRANTY
 	This software is provided by the copyright holders and contributors "as is" and
 	any express or implied warranties, including, but not limited to, the implied
 	warranties of merchantability and fitness for a particular purpose are
-	disclaimed. In no event shall the copyright owner or contributors be liable for
-	any direct, indirect, incidental, special, exemplary, or consequential damages
-	(including, but not limited to, procurement of substitute goods or services;
-	loss of use, data, or profits; or business interruption) however caused and on
-	any theory of liability, whether in contract, strict liability, or tort
-	(including negligence or otherwise) arising in any way out of the use of this
-	software, even if advised of the possibility of such damage.
+	disclaimed. In no event shall the copyright owner or contributors of this
+	Source be liable for any direct, indirect, incidental, special, exemplary, or
+	consequential damages (including, but not limited to, procurement of substitute
+	goods or services; loss of use, data, or profits; or business interruption)
+	however caused and on any theory of liability, whether in contract, strict
+	liability, or tort (including negligence or otherwise) arising in any way out
+	of the use of this software, even if advised of the possibility of such damage.
 	
 	3rd party sources must be treated separately. Source used within the project
 	but owned separately is void of this project and provided "as is" with
@@ -77,7 +78,9 @@
 			
 			self::$import = array(
 				'logging/logger.php',
-				'dbi/dbi.php'
+				
+				'dbi/dbi.php',
+				'session/session.php'
 			);
 			
 			self::load();
@@ -108,34 +111,113 @@
 	}
 	
 	// If user loads in page.
-	if(strtolower(realpath(__FILE__)) == strtolower(realpath($_SERVER['SCRIPT_FILENAME']))): ?>
-<!DOCTYPE HTML>
+	if(strtolower(realpath(__FILE__)) == strtolower(realpath($_SERVER['SCRIPT_FILENAME']))):
+?>
+<!DOCTYPE html>
 <html>
 	<head>
-		<meta charset="utf-8">
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 		<title>Welcome to Fram3w0rk!</title>
-		<link type="text/css" rel="stylesheet" href="manual/style.css">
+		
+		<!-- Latest compiled and minified jQuery -->
+		<script src="//code.jquery.com/jquery.min.js"></script>
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
+		
+		<!-- Optional theme -->
+		<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-theme.min.css">
+		
+		<!-- Latest compiled and minified JavaScript -->
+		<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
 	</head>
 	<body>
-		<div id="content">
-			<header>
-				<div id="logo"><p>Text</p></div>
-				<ul id="header-menu">
-					<li><a href="#">About</a></li>
-					<li><a href="#">FAQ</a></li>
-					<li><a href="#">Instances</a></li>
-					<li><a href="#">Classes</a></li>
-					<li><a href="#">Other Resources</a></li>
+		<div class="navbar navbar-default navbar-static-top navbar-inverse navbar-fixed-top" role="navigation">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="#">Fram3w0rk</a>
+			</div>
+			<div class="collapse navbar-collapse bs-js-navbar-collapse">
+				<ul class="nav navbar-nav">
+					<li class="active"><a href="#home" data-toggle="tab">Home</a></li>
+					<li><a href="#about" data-toggle="tab">About</a></li>
+					<li><a href="#faq" data-toggle="tab">FAQ</a></li>
+					<li><a href="#getting-started" data-toggle="tab">Getting Started</a></li>
+					<li class="dropdown">
+						<a id="drop1" href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">Classes<b class="caret"></b></a>
+						<ul class="dropdown-menu" role="menu" aria-labelledby="drop1">
+							<li><a href="#classes-dbi" data-toggle="tab">DBI</a></li>
+							<li><a href="#classes-log" data-toggle="tab">Log</a></li>
+						</ul>
+					</li>
+					<li><a href="#other-resources" data-toggle="tab">Other Resources</a></li>
+					<li><a href="#acknowledgements" data-toggle="tab">Acknowledgements</a></li>
 				</ul>
-			</header>
-			<article>
-				<h1>Welcome to Fram3work!</h1>
-				<p>Fram3w0rk is an open-source framework designed to connect and unify code across programming languages, making it easier to learn, retain, and code. Fram3w0rk PHP is the respective PHP framework for building PHP website applications.</p>
-			</article>
+				<a class="nav navbar-nav navbar-right navbar-brand" href="#">PHP v0.5 [Alpha]</a>
+			</div><!--/.nav-collapse -->
+		</div>
+		<div class="container" style="padding-top: 50px">
+			<div class="tab-content">
+				<div class="tab-pane active" id="home">
+					<article>
+						<h1>Welcome to Fram3w0rk PHP!</h1>
+						<p>Fram3w0rk is an open-source framework designed to connect and unify code across programming languages, making it easier to learn, retain, and code. Fram3w0rk PHP is the respective PHP framework for building PHP website applications.</p>
+					</article>
+				</div>
+				<div class="tab-pane" id="about">
+					<h1>About</h1>
+				</div>
+				<div class="tab-pane" id="faq">
+					<h1>FAQ</h1>
+				</div>
+				<div class="tab-pane" id="getting-started">
+					<h1>Getting Started</h1>
+					<h2>Implementing Fram3w0rk</h2>
+					<p>Fram3w0rk is based on the singleton pattern logic. The first thing you will need to do is impliment this file into your PHP script. Start with <code>&lt;?php&gt; require_once('{directory to Fram3w0rk}/index.php'); ?&gt;</code>. That is all that you need to do to start using Fram3w0rk!</p>
+					<h2>Instantiating Class Instances</h2>
+					<p>One core class will be implimented immediately upon implimentation. All others will need to be instantiated. Let's dig in. . .</p>
+					<p>Upon implimenting the core Fram3w0rk PHP file into your code (as shown above), the <code>Log</code> class will be made immediately available. <a href="#classes-log" data-toggle="tab">This class</a> records logs for errors and successes used within other classes and can be used in other code such as your own. Read the documentation for more info.</p>
+					<p>To impliment any class, use the static method <code>$className = Instance::get('className');</code> to return a new object instance of a class.</p>
+				</div>
+				<div class="tab-pane" id="classes-dbi">
+					<h1>Classes</h1>
+					<h2>DBI</h2>
+				</div>
+				<div class="tab-pane" id="classes-log">
+					<h1>Classes</h1>
+					<h2>Log</h2>
+				</div>
+				<div class="tab-pane" id="other-resources">
+					<h1>Other Resources</h1>
+					<h6><a target="_blank" href="http://www.lawtonsoft.com/fram3work">Fram3w0rk</a></h6>
+					<h6><a target="_blank" href="http://php.net/">PHP.net</a></h6>
+				</div>
+				<div class="tab-pane" id="acknowledgements">
+					<h1>Acknowledgements</h1>
+					<p>We would like to acknowledge the help of those who have contibuted to Fram3w0rk.</p>
+					<h5>[Created By]</h5>
+					<h6>Jonathan Lawton</h6>
+					<h5>[Project Manager]</h5>
+					<h6>Jonathan Lawton</h6>
+					<h5>[Lead Developer]</h5>
+					<h6>Jonathan Lawton</h6>
+					<h5>[Developers] (in ahabetical order)</h5>
+					<h6></h6>
+					<h6>Jonathan Lawton</h6>
+					<h6></h6>
+					<h6><a target="_blank" href="http://www.fram3w0rk.com/">Get involved today!</a></h6>
+					<h5>[Sponsored By]</h5>
+					<h6></h6>
+					<h5>[Special Thanks]</h5>
+					<h6><a target="_blank" href="http://php.net/">The PHP Group</a></h6>
+					<h6><a target="_blank" href="http://jquery.com/">The jQuery Foundation</a></h6>
+					<h6><a target="_blank" href="http://getbootstrap.com/">Bootstrap</a></h6>
+				</div>
+			</div>
 			<footer>
-				<p>Copyright (c) 2012-2013, Jonathan Lawton. All Rights reserved.</p>
+				<p>Copyright (c) 2012-2014, Jonathan Lawton. All Rights reserved.</p>
 			</footer>
 		</div>
 	</body>
 </html>
+
 <?php endif; ?>
