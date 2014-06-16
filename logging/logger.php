@@ -19,8 +19,8 @@
 				self::$status[$id]["class"] = $args[0];
 				self::$status[$id]["function"] = $args[1];
 				self::$status[$id]["success"] = ($args[2] ? "TRUE" : "FALSE");
-				if($args[2] == FALSE && isset($args[3]) && !empty($args[3])) {
-					self::$status[$id]["error"] = $args[3];
+				if(isset($args[3]) && !empty($args[3]) && is_string($args[3])) {
+					self::$status[$id]["message"] = $args[3];
 					if(isset($args[4]) && !empty($args[4])) self::$status[$id]["data"] = $args[4];
 				}
 				elseif(isset($args[3]) && !empty($args[3])) self::$status[$id]["data"] = $args[3];
