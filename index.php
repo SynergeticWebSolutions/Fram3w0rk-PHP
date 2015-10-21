@@ -3,11 +3,10 @@
 	
 	Project: Fram3w0rk PHP 0.5 [Alpha]
 	Website: http://www.fram3w0rk.com/
-	Last Modified: Oct 1, 2013
 	Author: Jonathan Lawton (wanathan101@gmail.com)
 	Contributers: none, yet :-(  (Come join in!)
 	
-	Copyright (c) 2012-2013, Jonathan Lawton. All rights reserved.
+	Copyright (c) 2012-2014, Jonathan Lawton. All rights reserved.
 	
 	TERMS AND CONDITIONS
 	Revised: Oct 1, 2013
@@ -62,7 +61,7 @@
 	applications.
 	
 	
-	Copyright (c) 2012-2013, Jonathan Lawton. All Rights reserved.
+	Copyright (c) 2012-2014, Jonathan Lawton. All Rights reserved.
 	
 	******************************************************************************/
 	
@@ -77,10 +76,12 @@
 			define(__ROOT__, $_SERVER[HTTP_HOST]);
 			
 			self::$import = array(
-				'logging/logger.php',
+				'log/index.php',
 				
-				'dbi/dbi.php',
-				'session/session.php'
+				'curl/index.php',
+				'dbi/index.php',
+				'ftp/index.php',
+				'session/index.php'
 			);
 			
 			self::load();
@@ -94,7 +95,7 @@
 			$args = func_get_args();
 			if(isset(self::$import) && !empty(self::$import)) {
 				$import = self::$import;
-				foreach($import as $file) {
+				foreach(self::$import as $file) {
 					$file = (isset($args[0]) && !empty($args[0]) ? $args[0] : '') . $file;
 					require_once($file);
 				}
@@ -117,19 +118,19 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-		<title>Welcome to Fram3w0rk!</title>
+		<title>Fram3w0rk</title>
 		
 		<!-- Latest compiled and minified jQuery -->
 		<script src="//code.jquery.com/jquery.min.js"></script>
 
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
+		<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 		
 		<!-- Optional theme -->
-		<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-theme.min.css">
+		<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
 		
 		<!-- Latest compiled and minified JavaScript -->
-		<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+		<script src="//netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 	</head>
 	<body>
 		<div class="navbar navbar-default navbar-static-top navbar-inverse navbar-fixed-top" role="navigation">
@@ -145,12 +146,16 @@
 					<li class="dropdown">
 						<a id="drop1" href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">Classes<b class="caret"></b></a>
 						<ul class="dropdown-menu" role="menu" aria-labelledby="drop1">
-							<li><a href="#classes-dbi" data-toggle="tab">DBI</a></li>
-							<li><a href="#classes-log" data-toggle="tab">Log</a></li>
+<?php
+	$files = scandir('.');
+	foreach($files as $file) {
+		if(!in_array($file, array('.', '..')) && file_exists($file . '/index.php')) echo "\t\t\t\t\t\t\t" . '<li><a href="#classes-' . $file . '" data-toggle="tab">' . strToUpper($file) . '</a></li>' . "\n";
+	}
+?>
 						</ul>
 					</li>
 					<li><a href="#other-resources" data-toggle="tab">Other Resources</a></li>
-					<li><a href="#acknowledgements" data-toggle="tab">Acknowledgements</a></li>
+					<li><a href="#credits" data-toggle="tab">Credits</a></li>
 				</ul>
 				<a class="nav navbar-nav navbar-right navbar-brand" href="#">PHP v0.5 [Alpha]</a>
 			</div><!--/.nav-collapse -->
@@ -178,43 +183,54 @@
 					<p>Upon implimenting the core Fram3w0rk PHP file into your code (as shown above), the <code>Log</code> class will be made immediately available. <a href="#classes-log" data-toggle="tab">This class</a> records logs for errors and successes used within other classes and can be used in other code such as your own. Read the documentation for more info.</p>
 					<p>To impliment any class, use the static method <code>$className = Instance::get('className');</code> to return a new object instance of a class.</p>
 				</div>
-				<div class="tab-pane" id="classes-dbi">
-					<h1>Classes</h1>
-					<h2>DBI</h2>
-				</div>
-				<div class="tab-pane" id="classes-log">
-					<h1>Classes</h1>
-					<h2>Log</h2>
-				</div>
+<?php
+	$files = scandir('.');
+	foreach($files as $file) {
+		if(!in_array($file, array('.', '..')) && file_exists($file . '/index.php')) {
+?>
+			<div class="tab-pane" id="classes-<?php echo $file; ?>">
+				<h1>Classes</h1>
+				<h2><?php echo strToUpper($file); ?></h2>
+<?php
+	$handle = fopen($file . '/index.php', 'r');
+	echo fread($handle, filesize($file . '/index.php'));
+	fclose($handle);
+?>
+			</div>
+<?php
+		}
+	}
+?>
 				<div class="tab-pane" id="other-resources">
 					<h1>Other Resources</h1>
 					<h6><a target="_blank" href="http://www.lawtonsoft.com/fram3work">Fram3w0rk</a></h6>
 					<h6><a target="_blank" href="http://php.net/">PHP.net</a></h6>
 				</div>
-				<div class="tab-pane" id="acknowledgements">
-					<h1>Acknowledgements</h1>
+				<div class="tab-pane" id="credits">
+					<h1>Credits</h1>
 					<p>We would like to acknowledge the help of those who have contibuted to Fram3w0rk.</p>
-					<h5>[Created By]</h5>
-					<h6>Jonathan Lawton</h6>
-					<h5>[Project Manager]</h5>
-					<h6>Jonathan Lawton</h6>
-					<h5>[Lead Developer]</h5>
-					<h6>Jonathan Lawton</h6>
-					<h5>[Developers] (in ahabetical order)</h5>
-					<h6></h6>
-					<h6>Jonathan Lawton</h6>
-					<h6></h6>
-					<h6><a target="_blank" href="http://www.fram3w0rk.com/">Get involved today!</a></h6>
-					<h5>[Sponsored By]</h5>
-					<h6></h6>
-					<h5>[Special Thanks]</h5>
-					<h6><a target="_blank" href="http://php.net/">The PHP Group</a></h6>
-					<h6><a target="_blank" href="http://jquery.com/">The jQuery Foundation</a></h6>
-					<h6><a target="_blank" href="http://getbootstrap.com/">Bootstrap</a></h6>
+					<dl>
+						<dt>Created By</dt>
+						<dd>Jonathan Lawton</dd>
+						<dt>Project Manager</dt>
+						<dd>Jonathan Lawton</dd>
+						<dt>Lead Developer</dt>
+						<dd>Jonathan Lawton</dd>
+						<dt>Developers</dt>
+						<dd></dd>
+						<dd></dd>
+						<dd><a target="_blank" href="http://lawtonsoft.com/projects/fram3w0rk/">Get involved today!</a></dd>
+						<dt>Sponsored By</dt>
+						<dd></dd>
+						<dt>Special Thanks &amp; Acknowledgement</dt>
+						<dd><a target="_blank" href="http://php.net/">The PHP Group</a></dd>
+						<dd><a target="_blank" href="http://jquery.com/">The jQuery Foundation</a></dd>
+						<dd><a target="_blank" href="http://getbootstrap.com/">Bootstrap</a></dd>
+					</dl>
 				</div>
 			</div>
 			<footer>
-				<p>Copyright (c) 2012-2014, Jonathan Lawton. All Rights reserved.</p>
+				<p>Copyright (c) 2012-2015, Jonathan Lawton. All Rights reserved.</p>
 			</footer>
 		</div>
 	</body>
