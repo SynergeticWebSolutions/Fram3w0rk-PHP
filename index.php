@@ -6,7 +6,7 @@
 	Author: Jonathan Lawton (wanathan101@gmail.com)
 	Contributers: none, yet :-(  (Come join in!)
 	
-	Copyright (c) 2012-2014, Jonathan Lawton. All rights reserved.
+	Copyright (c) 2012-2015, LawtonSoft. All rights reserved.
 	
 	TERMS AND CONDITIONS
 	Revised: Oct 1, 2013
