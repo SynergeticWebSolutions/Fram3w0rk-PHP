@@ -6,7 +6,7 @@
 	Author: Jonathan Lawton (wanathan101@gmail.com)
 	Contributers: none, yet :-(  (Come join in!)
 	
-	Copyright (c) 2012-2015, LawtonSoft. All rights reserved.
+	Copyright (c) 2012+, LawtonSoft. All rights reserved.
 	
 	TERMS AND CONDITIONS
 	Revised: Oct 1, 2013
@@ -230,7 +230,7 @@
 				</div>
 			</div>
 			<footer>
-				<p>Copyright (c) 2012-2015, Jonathan Lawton. All Rights reserved.</p>
+				<p>Copyright (c) 2012+, Jonathan Lawton. All Rights reserved.</p>
 			</footer>
 		</div>
 	</body>
