@@ -60,9 +60,6 @@
 	Fram3w0rk PHP is the respective PHP framework for building PHP website
 	applications.
 	
-	
-	Copyright (c) 2012-2014, Jonathan Lawton. All Rights reserved.
-	
 	******************************************************************************/
 	
 	// Initite Fram3w0rk
@@ -115,9 +112,9 @@
 	if(strtolower(realpath(__FILE__)) == strtolower(realpath($_SERVER['SCRIPT_FILENAME']))):
 ?>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta charset="utf-8">
 		<title>Fram3w0rk</title>
 		
 		<!-- Latest compiled and minified jQuery -->
