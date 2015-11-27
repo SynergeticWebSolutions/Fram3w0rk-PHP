@@ -1,6 +1,6 @@
 {
     "name": "lawtonsoft/framework-php",
-    "description": "One liner description",
+    "description": "\"Class\" effort to unify functions across 30 languages.",
     "keywords": [
       "framework",
       "mvc",
