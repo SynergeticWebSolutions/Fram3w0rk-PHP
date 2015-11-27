@@ -1,0 +1,23 @@
+{
+    "name": "lawtonsoft/framework-php",
+    "description": "One liner description",
+    "keywords": [
+      "framework",
+      "mvc",
+      "web"
+    ],
+    "homepage": "https://github.com/example/example",
+    "type": "library",
+    "license": "MIT",
+    "authors": [{
+        "name": "Jonathan Lawton",
+        "email": "jlawton@lawtonsoft.com",
+        "homepage": "http://lawtonsoft.com/projects/fram3w0rk"
+    }],
+    "require": {
+        "php": ">=5.3.0"
+    },
+    "autoload": {
+        "psr-0": {"MyLibraryNamespace": "src/"}
+    }
+}
