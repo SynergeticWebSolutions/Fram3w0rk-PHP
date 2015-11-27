@@ -9,7 +9,7 @@ As an open-source framework designed to connect and unify code across programmin
 
 Download & Source
 -----------------
-Fram3w0rk is available via Git.
+Fram3w0rk is available via <a href="//github.com/LawtonSoft/Fram3w0rk-PHP">Git</a>.
 
 Support
 -------
